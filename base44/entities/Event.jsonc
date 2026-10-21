@@ -1,0 +1,137 @@
+{
+  "name": "Event",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The event's chosen name"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "wedding",
+        "birthday",
+        "baby_shower",
+        "corporate",
+        "community",
+        "anniversary",
+        "other"
+      ],
+      "default": "other"
+    },
+    "occasion_name": {
+      "type": "string",
+      "description": "Plain-language occasion, e.g. Mom's 60th birthday"
+    },
+    "guest_count": {
+      "type": "number"
+    },
+    "event_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "date_flexibility": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "venue_preference": {
+      "type": "string"
+    },
+    "venue_capacity": {
+      "type": "number"
+    },
+    "budget_total": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string",
+      "default": "INR"
+    },
+    "budget_flexibility": {
+      "type": "string"
+    },
+    "theme": {
+      "type": "string"
+    },
+    "culture": {
+      "type": "string"
+    },
+    "must_haves": {
+      "type": "string"
+    },
+    "no_gos": {
+      "type": "string"
+    },
+    "name_suggestions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "summary": {
+      "type": "string",
+      "description": "AI-written blueprint summary"
+    },
+    "emergency_mode": {
+      "type": "boolean",
+      "default": false
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "planning",
+        "active",
+        "completed"
+      ],
+      "default": "planning"
+    }
+  },
+  "required": [
+    "name",
+    "event_type",
+    "event_date"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
