@@ -12,7 +12,16 @@ afterEach(() => {
 
 describe("planningScore", () => {
   it("returns zero when there is no planning progress", () => {
-    expect(planningScore()).toBe(0);
+    expect(
+      planningScore({
+        tasksDone: 0,
+        tasksTotal: 0,
+        vendorPoints: 0,
+        vendorMax: 0,
+        categoriesLogged: 0,
+        categoriesTotal: 0,
+      })
+    ).toBe(0);
   });
 
   it("calculates the weighted score for partial progress", () => {
